@@ -65,8 +65,10 @@ public class OpenImageActivity extends AppCompatActivity implements LoaderManage
                     String imageName =(String) parent.getItemAtPosition(position);
                    // if (imageName.equals(""))return;
                     final Uri mediaUri = imagesList.get(imageName);
+                    MainActivity.firstrun= false;
                     Intent intent  = new Intent(OpenImageActivity.this,MainActivity.class);
                     intent.putExtra("uri",mediaUri.toString());
+                    startActivity(intent);
             }
         });
 

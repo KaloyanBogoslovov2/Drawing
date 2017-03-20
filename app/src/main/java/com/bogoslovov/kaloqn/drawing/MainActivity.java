@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE=0;
 
     public static DrawingView drawingView;
+
+    public static boolean firstrun = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +55,11 @@ public class MainActivity extends AppCompatActivity {
         layout.addView(drawingView);
     }
 
-    private void getIntentData(){
-        Intent intent = getIntent();
-        if (intent!=null){
+    private void getIntentData() {
+        if (!firstrun) {
+            Intent intent = getIntent();
             String uri = intent.getStringExtra("uri");
+
             Bitmap image = null;
             try {
                 image = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uri));
@@ -67,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
             Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
             DrawingView.mCanvas = new Canvas(mutableBitmap);
         }
-
     }
+
 
     private void checkForPermissions(){
 
