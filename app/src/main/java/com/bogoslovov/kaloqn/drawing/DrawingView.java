@@ -18,7 +18,7 @@ public class DrawingView extends View {
     private static final float TOUCH_TOLERANCE = 4;
 
     private Bitmap mBitmap;
-    private Canvas mCanvas;
+    public static Canvas mCanvas;
     private Path    mPath;
     private Paint mBitmapPaint;
     Context context;
@@ -46,7 +46,6 @@ public class DrawingView extends View {
         circlePaint.setStrokeJoin(Paint.Join.MITER);
         circlePaint.setStrokeWidth(4f);
 
-        //mCanvas = new Canvas();
     }
 
     @Override

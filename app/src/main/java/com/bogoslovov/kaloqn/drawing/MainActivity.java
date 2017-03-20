@@ -3,8 +3,11 @@ package com.bogoslovov.kaloqn.drawing;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import static com.bogoslovov.kaloqn.drawing.R.id.drawing;
@@ -34,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         initDrawingView();
+        getIntentData();
         checkForPermissions();
     }
 
@@ -45,6 +51,23 @@ public class MainActivity extends AppCompatActivity {
         drawingView.setDrawingCacheEnabled(true);
         LinearLayout layout = (LinearLayout) findViewById(drawing);
         layout.addView(drawingView);
+    }
+
+    private void getIntentData(){
+        Intent intent = getIntent();
+        if (intent!=null){
+            String uri = intent.getStringExtra("uri");
+            Bitmap image = null;
+            try {
+                image = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uri));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Bitmap workingBitmap = Bitmap.createBitmap(image);
+            Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
+            DrawingView.mCanvas = new Canvas(mutableBitmap);
+        }
+
     }
 
     private void checkForPermissions(){
@@ -72,15 +95,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveImage(View v){
-
         Intent intent = new Intent(MainActivity.this,SaveImageActivity.class);
         startActivity(intent);
-
-
     }
 
     public void openImage(View v){
-
+        Intent intent = new Intent(MainActivity.this,OpenImageActivity.class);
+        startActivity(intent);
     }
 
     public void changeDrawingLineToThin(View v){
@@ -97,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeDrawingColorToBlue(View v){
         drawingView.mPaint.setColor(COLOR_BLUE);
-
     }
 
     public void changeDrawingColorToGreen(View v){
