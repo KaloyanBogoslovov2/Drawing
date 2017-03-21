@@ -20,6 +20,7 @@ import static com.bogoslovov.kaloqn.drawing.MainActivity.drawingView;
 
 public class SaveImageActivity extends AppCompatActivity {
     private static String currentFormat = ".png";
+    public String imagePath;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,9 +56,12 @@ public class SaveImageActivity extends AppCompatActivity {
                 fileName.getText().toString()+currentFormat, "drawing");
         drawingView.destroyDrawingCache();
 
+
         if (imgSaved.equals(null)) {
             Toast.makeText(this, "image NOT SAVED",Toast.LENGTH_SHORT).show();
         } else {
+            imagePath = imgSaved;
+            System.out.println(imagePath);
             Intent intent = new Intent (SaveImageActivity.this,MainActivity.class);
             startActivity(intent);
             if (imgSaved.equals(null)) Toast.makeText(this, "image SAVED",Toast.LENGTH_SHORT).show();

@@ -4,10 +4,14 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -17,9 +21,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.UUID;
 
+import static android.R.attr.bitmap;
 import static com.bogoslovov.kaloqn.drawing.R.id.drawing;
 
 
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         Paint paint = getPaint();
         drawingView = new DrawingView(this,paint);
+        drawingView.setBackgroundColor(Color.WHITE);
         drawingView.setDrawingCacheEnabled(true);
         LinearLayout layout = (LinearLayout) findViewById(drawing);
         layout.addView(drawingView);
@@ -57,19 +64,28 @@ public class MainActivity extends AppCompatActivity {
 
     private void getIntentData() {
         if (!firstrun) {
-            Intent intent = getIntent();
-            String uri = intent.getStringExtra("uri");
-
-            Bitmap image = null;
             try {
-                image = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uri));
-            } catch (IOException e) {
+                Intent intent = getIntent();
+                String uri = intent.getStringExtra("uri");
+
+                ParcelFileDescriptor parcelFileDescriptor =
+                        getContentResolver().openFileDescriptor(Uri.parse(uri), "r");
+                FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+                Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+                parcelFileDescriptor.close();
+
+                Bitmap workingBitmap = Bitmap.createBitmap(image);
+                Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
+                //DrawingView.mCanvas = new Canvas(mutableBitmap);
+                //drawingView.invalidate();
+                Drawable d = new BitmapDrawable(getResources(), mutableBitmap);
+                drawingView.setBackground(d);
+
+            }catch(IOException e){
                 e.printStackTrace();
             }
-            Bitmap workingBitmap = Bitmap.createBitmap(image);
-            Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
-            DrawingView.mCanvas = new Canvas(mutableBitmap);
         }
+        firstrun=true;
     }
 
 
