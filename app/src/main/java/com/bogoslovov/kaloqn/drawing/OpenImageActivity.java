@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,10 +51,12 @@ public class OpenImageActivity extends AppCompatActivity implements LoaderManage
                 this,
                 R.layout.image_name,
                 R.id.image_name_text_view,
-                new String[]{" "}
+                new String[]{}
         );
         listView = (ListView) findViewById(R.id.images_list);
         listView.setAdapter(adapter);
+        TextView emptyList = (TextView) findViewById(R.id.empty);
+        listView.setEmptyView(emptyList);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

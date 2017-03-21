@@ -7,4 +7,5 @@
     <string name="open_image">open</string>
 
     <string name="image_name">image title</string>
+    <string name="empty_list">No images found</string>
 </resources>
