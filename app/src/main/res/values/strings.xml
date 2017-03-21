@@ -6,5 +6,5 @@
     <string name="save_image">save</string>
     <string name="open_image">open</string>
 
-    <string name="image_name">image name</string>
+    <string name="image_name">image title</string>
 </resources>

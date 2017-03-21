@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="file_types">
-        <item>.png</item>
-        <item>.jpg</item>
-        <item>.bmp</item>
-
-    </string-array>
-</resources>

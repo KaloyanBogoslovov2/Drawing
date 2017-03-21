@@ -9,14 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/save_image_edit_text"
-        android:hint="@string/image_name"/>
-
-    <Spinner
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:id="@+id/save_image_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:hint="@string/image_name"
+        android:layout_marginBottom="16dp"/>
 
     <Button
         android:layout_width="match_parent"

@@ -3,8 +3,6 @@ package com.bogoslovov.kaloqn.drawing;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,7 +18,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by kaloqn on 3/20/17.
@@ -62,9 +59,10 @@ public class OpenImageActivity extends AppCompatActivity implements LoaderManage
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     String imageName =(String) parent.getItemAtPosition(position);
-                   // if (imageName.equals(""))return;
+                    if (imageName.equals(""))return;
                     final Uri mediaUri = imagesList.get(imageName);
-                    MainActivity.firstrun= false;
+                    MainActivity.run = false;
+
                     Intent intent  = new Intent(OpenImageActivity.this,MainActivity.class);
                     intent.putExtra("uri",mediaUri.toString());
                     startActivity(intent);
@@ -91,8 +89,8 @@ public class OpenImageActivity extends AppCompatActivity implements LoaderManage
                 String imageName = cursor.getString(COL_DISPLAY_NAME);
                 long songId = cursor.getLong(COL_ID);
                 Uri mediaUri = ContentUris.withAppendedId(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, songId);
+
                 imagesList.put(imageName, mediaUri);
-                System.out.println(imageName+"  "+ mediaUri);
                 allImagesNames.add(imageName);
             } while (cursor.moveToNext());
             updateAdapter();
