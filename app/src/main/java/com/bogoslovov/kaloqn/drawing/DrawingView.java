@@ -18,13 +18,14 @@ public class DrawingView extends View {
     private static final float TOUCH_TOLERANCE = 4;
 
     private Bitmap mBitmap;
-    public static Canvas mCanvas;
+    private Canvas mCanvas;
     private Path    mPath;
     private Paint mBitmapPaint;
-    Context context;
+    private Context context;
     private Paint circlePaint;
     private Path circlePath;
-    private float mX, mY;
+    private float mX;
+    private float mY;
     public Paint mPaint;
 
     public DrawingView(Context context) {
@@ -118,5 +119,4 @@ public class DrawingView extends View {
         mCanvas.drawPath(mPath,  mPaint);
         mPath.reset();
     }
-
 }

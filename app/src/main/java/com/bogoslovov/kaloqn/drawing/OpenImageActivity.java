@@ -27,12 +27,12 @@ import java.util.HashMap;
 public class OpenImageActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
     private static final int MEDIA_LOADER = 1;
 
-    public static final String[] PROJECTION = {
+    private static final String[] PROJECTION = {
             MediaStore.Images.Media._ID,
             MediaStore.Images.Media.DISPLAY_NAME
     };
-    public static final int COL_ID = 0;
-    public static final int COL_DISPLAY_NAME = 1;
+    private static final int COL_ID = 0;
+    private static final int COL_DISPLAY_NAME = 1;
 
     private  HashMap<String, Uri> imagesList = new HashMap<String, Uri>();
     private ArrayList<String> allImagesNames= null;
@@ -90,8 +90,8 @@ public class OpenImageActivity extends AppCompatActivity implements LoaderManage
             allImagesNames = new ArrayList<>();
             do {
                 String imageName = cursor.getString(COL_DISPLAY_NAME);
-                long songId = cursor.getLong(COL_ID);
-                Uri mediaUri = ContentUris.withAppendedId(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, songId);
+                long imageId = cursor.getLong(COL_ID);
+                Uri mediaUri = ContentUris.withAppendedId(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, imageId);
 
                 imagesList.put(imageName, mediaUri);
                 allImagesNames.add(imageName);
