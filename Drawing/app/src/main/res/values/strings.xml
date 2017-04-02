@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Drawing</string>
+    <string name="clear">Clear</string>
+    <string name="thin_line">thin line</string>
+    <string name="thick_line">thick line</string>
+    <string name="save_image">save</string>
+    <string name="open_image">open</string>
+
+    <string name="image_name">image title</string>
+    <string name="empty_list">No images found</string>
+</resources>

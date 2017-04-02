@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:orientation="horizontal"
+        android:id="@+id/drawing">
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/thin_line"
+            android:text="@string/thin_line"
+            android:textSize="18sp"
+            android:onClick="changeDrawingLineToThin"
+            android:background="?android:attr/selectableItemBackground"
+            style="@style/Buttons"
+            />
+        <Button
+            android:id="@+id/thick_line"
+            android:text="@string/thick_line"
+            android:textSize="18sp"
+            android:onClick="changeDrawingLineToThick"
+            android:background="?android:attr/selectableItemBackground"
+            style="@style/Buttons"
+            />
+        <Button
+            android:id="@+id/clear"
+            android:text="@string/clear"
+            android:textSize="18sp"
+            android:onClick="clearDrawing"
+            android:background="?android:attr/selectableItemBackground"
+            style="@style/Buttons"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1">
+
+        <Button
+            android:id="@+id/blue"
+            android:onClick="changeDrawingColorToBlue"
+            android:background="@android:color/holo_blue_dark"
+            style="@style/Buttons"
+            />
+        <Button
+            android:id="@+id/green"
+            android:onClick="changeDrawingColorToGreen"
+            android:background="@android:color/holo_green_dark"
+            style="@style/Buttons"
+            />
+        <Button
+            android:id="@+id/red"
+            android:onClick="changeDrawingColorToRed"
+            android:background="@android:color/holo_red_dark"
+            style="@style/Buttons"
+            />
+    </LinearLayout>
+
+</LinearLayout>
