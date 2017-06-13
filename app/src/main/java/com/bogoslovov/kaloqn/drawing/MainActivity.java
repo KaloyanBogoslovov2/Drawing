@@ -1,5 +1,7 @@
 package com.bogoslovov.kaloqn.drawing;
 
+import static com.bogoslovov.kaloqn.drawing.R.id.drawing;
+
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,13 +27,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import static android.R.id.input;
-import static com.bogoslovov.kaloqn.drawing.R.id.drawing;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -163,10 +161,18 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("Save Image");
         builder.setMessage("Are you sure that you want to save the image?");
 
+
+        LinearLayout layout = new LinearLayout(this);
+        //LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+        layout.setPadding(16,0,16,0);
+        //layout.setLayoutParams(params);
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setSingleLine(false);
         input.setHint("title of image");
-        builder.setView(input);
+        //input.setWidth(layout.getWidth());
+        layout.addView(input);
+        builder.setView(layout);
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
